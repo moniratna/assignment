@@ -19,13 +19,8 @@ export default function Cardcomponent({data, region}) {
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {i.notes}
         </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
       </CardContent>
       
-    </Card>) : <Typography>No Data Available</Typography>}
+    </Card>) : <Typography style={{display: 'flex', justifyContent:'center'}}>No holidays </Typography>}
   </>
 }

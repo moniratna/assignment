@@ -12,8 +12,28 @@ import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import DatePicker from 'react-modern-calendar-datepicker';
 import { Calendar } from "react-modern-calendar-datepicker";
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import {makeStyles, Grid } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  heading: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '50px',
+  },
+  btn:{
+    display:'flex',
+    justifyContent:'center',
+  },
+  daterange:{
+    display:'flex',
+    justifyContent:'center',
+    marginTop:'20px',
+  }
+
+})
 
 export default function Home() {
+  const classes = useStyles();
     // const [value, onChange] = useState(new Date());
     const navigate = useNavigate()
     // const [value, setValue] = React.useState([null, null]);
@@ -34,9 +54,6 @@ export default function Home() {
         }
         fetchapi()
       },[])
-const handleSubmit =()=>{
-    
-}
 const handleYesterday = () =>{
     console.log(obj)
     const d = (moment().subtract(1, 'days').format('YYYY-MM-DD'))
@@ -142,16 +159,33 @@ navigate('/content')
 }
 
   return (
+    <>
     <div>
-        <Button size="large" variant='contained' onClick={handleYesterday}>Yesterday</Button>
-        <Button size="large" variant='contained'onClick={handleLastWeek}>Last week</Button>
-        <Button size="large" variant='contained'onClick={handleLastMonth}>Last Month</Button>
-
-
-    <Button onClick={handleSubmit}>Submit</Button>
-    <h1>Hello</h1>
+      <Typography variant="h4" gutterBottom className={classes.heading}>
+        Search for Bank Holidays
+      </Typography>
+    </div>
+    <div>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={4} className={classes.btn}>
+        <Button size="large" variant='contained' onClick={handleYesterday} color='primary'>Yesterday</Button>
+        </Grid>
+        <Grid item xs={4} className={classes.btn}>
+        <Button size="large" variant='contained'onClick={handleLastWeek} color='primary' >Last week</Button>
+        </Grid>
+        <Grid item xs={4} className={classes.btn}>
+        <Button size="large" variant='contained'onClick={handleLastMonth} color='primary'>Last Month</Button>
+        </Grid>
+      </Grid>
+    </Box>
+    </div>
+    <div className={classes.daterange}>
+    <Typography style={{marginRight:'20px'}}>Select Date Range</Typography>
     <DateRangePicker onChange={onChange} value={value} />
-    <Button onClick={handleSelect}>Submit</Button>
+    <Button onClick={handleSelect} variant='contained' color='primary'>Submit</Button>
   </div>
+    </>
+    
   )
 }
